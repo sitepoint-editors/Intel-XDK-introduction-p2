@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+    <html>
+    
+        <head>
+            
+            <!-- Meta data -->
+            <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta http-equiv="Pragma" content="no-cache">
+    
+            <script type="text/javascript" charset="utf-8" src="intelxdk.js"></script>
+            <script type="text/javascript" language="javascript">
+                var isIntel=window.intel&&window.intel.xdk
+                
+                // This event handler is fired once the intel libraries are ready
+                function onDeviceReady() {
+                    //hide splash screen now that our app is ready to run
+                    intel.xdk.device.hideSplashScreen();
+                    setTimeout(function () {
+                        $.ui.launch();
+                    }, 50);
+                }
+                
+                //initial event handler to detect when intel is ready to roll
+                document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
+            
+            </script>
+    
+            <script src="js/appframework.ui.min.js"></script>
+    
+            <script>
+                if(isIntel)
+                    $.ui.autoLaunch = false;
+                    $.ui.useOSThemes = true; //Change this to false to force a device theme
+                    $.ui.blockPageScroll();
+                    $(document).ready(function () {
+                        if ($.ui.useOSThemes && (!$.os.ios||$.os.ios7))
+                            $("#afui").removeClass("ios");
+                    });
+            </script>
+            
+            <!-- Import the css files -->
+            <link href="css/icons.css" rel="stylesheet" type="text/css">
+            <link href="css/af.ui.css" rel="stylesheet" type="text/css">
+            <link href="css/style.css" rel="stylesheet" type="text/css">
+            
+        </head>
+        
+        <body>
+    
+            <div id="afui">
+                
+                <div id="header" class="header"></div>
+                
+                <header id="myphotos_header">
+                    <h1 id="pageTitle">My Photos</h1> 
+                </header>
+                
+                <div id="content">
+        
+                    <div class="panel" title="Photos" id="main_pg" selected="selected">
+                        <!-- All the content goes here -->
+                    </div>
+
+                    <div class="panel" data-header="myphotos_header" id="myphotos_pg">
+                    
+                        <span>My Photos</span>
+
+                    </div>
+                    
+                </div>
+                
+                <!-- the footer -->
+                <div id="navbar" class="footer">
+                    <a href="#main_pg" class="icon home">Home</a>
+                    <a href="#myphotos_pg" class="icon picture">My Photos</a>
+                </div>
+    
+            </div>
+        
+            <script src="js/data.js"></script>
+            <script src="js/app.js"></script>
+        </body>
+    
+    </html>
